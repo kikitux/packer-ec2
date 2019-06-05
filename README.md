@@ -1,50 +1,88 @@
-# packer-ec2
-a packer repo with kitchen-test for an ec2 aws instance
+# nginx64
 
-## pre-requirements
+This repository is based on the following repository:
+- https://github.com/nielsabels/packer-xenial64
+Based on the following repository:
+- https://github.com/cbednarski/packer-ubuntu
 
-- packer must be installed [install packer](https://packer.io/intro/getting-started/install.html#precompiled-binaries)
+# Purpose
 
-## How to use this repo
+This repository attempts to store the minimum amount of code that is required to create a:
+- Ubuntu Xenial64 box
+- with standard nginx
+- using Packer
+- for AWS EC2
 
-- clone this repo
-```
-git clone https://github.com/kikitux/packer-ec2.git
-```
+# How to build
 
-- cd ninto the repo
-```
-cd packer-ec2
-```
+## Prerequisites
 
-- set the required AWS environment
-```
-export AWS_user=user
-export AWS_password=password
-export AWS_region=region
-```
+### rbenv
 
-- run packer build
+On MacOS:
 ```
-packer build template.json
-```
-
-- run kitchen-test
-```
-kitchen converge
-kitchen verify
-kitchen destroy
+brew install rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+source ~/.bash_profile
+rbenv init
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile
 ```
 
-## TODO
+On Linux:
+> Note:
+> On Graphical environments, when you open a shell, sometimes `~/.bash_profile` doesn't get loaded
+> You may need to `source ~/.bash_profile` manually or use `~/.bashrc`
 
-- [ ] this readme
-- [ ] how to install kitchen-test on the machine
-- [ ] a kitchen-test for this new ec2 instance
-- [ ] add some test so kitchen-test have some to do
+```
+apt update
+apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
+wget -q https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer -O- | bash
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+source ~/.bash_profile
+rbenv init
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile
+```
 
-## DONE
-- [x] how to use this repo
-- [x] how to install packer
-- [x] a packer ec2 project
-- [x] how to setup the variables, so packer build works
+### libraries
+
+```
+rbenv install 2.4.6
+rbenv local 2.4.6
+rbenv versions
+gem install bundler
+bundle install
+```
+
+### AWS CLI utility
+
+You need to set up the AWS CLI utility for packer to be able to interact with AWS. [Check this article out.](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
+
+Make sure you have set up your credentials either in ~/.aws/credentials or as an environment variable as described in the previous link.
+
+In order to test your AWS CLI setup, run the following command and observe the output (should be similar):
+
+```
+user@localhost ~ $ aws iam get-user
+{
+    "User": {
+        "Path": "/",
+        "UserName": "YOUR_USERNAME",
+        "UserId": "XXXXXXXXXXXXXXXXXXXX",
+        "Arn": "arn:aws:iam::00000000000000:user/YOUR_USERNAME",
+        "CreateDate": "2019-05-10T22:10:20Z",
+        "PasswordLastUsed": "2019-06-03T12:34:06Z"
+    }
+}
+```
+
+## Build
+
+    make
+
+
+# How to test
+
+    make kitchen
+    
