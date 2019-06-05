@@ -86,3 +86,6 @@ user@localhost ~ $ aws iam get-user
 
     make kitchen
     
+# TODO
+
+- [ ] automate the AMI-ID by telling kitchen to read it from the json produced by packer
