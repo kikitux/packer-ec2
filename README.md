@@ -3,22 +3,22 @@ a packer repo with kitchen-test for an ec2 aws instance
 
 ## How to use this repo
 
-1. clone this repo
+- clone this repo
 ```
 git clone https://github.com/kikitux/packer-ec2.git
 ```
 
-1. cd ninto the repo
+- cd ninto the repo
 ```
 cd packer-ec2
 ```
 
-1. run packer build
+- run packer build
 ```
 packer build template.json
 ```
 
-1. run kitchen-test
+- run kitchen-test
 ```
 kitchen converge
 kitchen verify
