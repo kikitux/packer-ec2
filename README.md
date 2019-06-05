@@ -1,6 +1,10 @@
 # packer-ec2
 a packer repo with kitchen-test for an ec2 aws instance
 
+## pre-requirements
+
+- packer must be installed [install packer](https://packer.io/intro/getting-started/install.html#precompiled-binaries)
+
 ## How to use this repo
 
 - clone this repo
@@ -28,7 +32,6 @@ kitchen destroy
 ## TODO
 
 - [ ] this readme
-- [ ] how to install packer
 - [ ] how to install kitchen-test on the machine
 - [ ] a packer ec2 project
 - [ ] a kitchen-test for this new ec2 instance
@@ -36,3 +39,4 @@ kitchen destroy
 
 ## DONE
 - [x] how to use this repo
+- [x] how to install packer
