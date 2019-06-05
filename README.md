@@ -1,50 +1,42 @@
-# packer-ec2
-a packer repo with kitchen-test for an ec2 aws instance
+# nginx64
 
-## pre-requirements
+This repository is based on the following repository:
+- https://github.com/nielsabels/packer-xenial64
+Based on the following repository:
+- https://github.com/cbednarski/packer-ubuntu
 
-- packer must be installed [install packer](https://packer.io/intro/getting-started/install.html#precompiled-binaries)
+# How to build
 
-## How to use this repo
+## Local virtualisation
 
-- clone this repo
-```
-git clone https://github.com/kikitux/packer-ec2.git
-```
+    make
+    
+Using the supplied makefile should automatically detect your OS environment and build the image correctly.
+If that doesn't work, you can specify which provider to use to build the image:
 
-- cd ninto the repo
-```
-cd packer-ec2
-```
+    make nginx64-vbox.box # when using virtualbox
+    make nginx64-vmware.box # when using vmware
 
-- set the required AWS environment
-```
-export AWS_user=user
-export AWS_password=password
-export AWS_region=region
-```
+## Using AWS
 
-- run packer build
-```
-packer build template.json
-```
+You need to set up the AWS CLI utility for packer to be able to interact with AWS. [Check this article out.](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 
-- run kitchen-test
-```
-kitchen converge
-kitchen verify
-kitchen destroy
-```
+    make nginx64-aws.box # when using AWS
 
-## TODO
 
-- [ ] this readme
-- [ ] how to install kitchen-test on the machine
-- [ ] a kitchen-test for this new ec2 instance
-- [ ] add some test so kitchen-test have some to do
+# How to test
 
-## DONE
-- [x] how to use this repo
-- [x] how to install packer
-- [x] a packer ec2 project
-- [x] how to setup the variables, so packer build works
+    make kitchen
+    
+Just like with building, you can specify which provider to use with your tests:
+
+    make kitchen-vbox
+    make kitchen-vmware
+
+# Purpose
+
+This repository attempts to store the minimum amount of code that is required to create a:
+- Ubuntu Xenial64 box
+- with standard nginx
+- using Packer
+- for VirtualBox or VMware
