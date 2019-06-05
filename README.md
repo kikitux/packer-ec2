@@ -17,6 +17,13 @@ git clone https://github.com/kikitux/packer-ec2.git
 cd packer-ec2
 ```
 
+- set the required AWS environment
+```
+export AWS_user=user
+export AWS_password=password
+export AWS_region=region
+```
+
 - run packer build
 ```
 packer build template.json
@@ -33,10 +40,11 @@ kitchen destroy
 
 - [ ] this readme
 - [ ] how to install kitchen-test on the machine
-- [ ] a packer ec2 project
 - [ ] a kitchen-test for this new ec2 instance
 - [ ] add some test so kitchen-test have some to do
 
 ## DONE
 - [x] how to use this repo
 - [x] how to install packer
+- [x] a packer ec2 project
+- [x] how to setup the variables, so packer build works
