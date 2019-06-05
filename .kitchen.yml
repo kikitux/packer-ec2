@@ -1,0 +1,24 @@
+---
+driver:
+  name: ec2
+
+provisioner:
+  name: shell
+
+platforms:
+  - name: ec2/nginx64
+    os_type: debian
+    driver:
+      image_id: ami-094093a590ea1f1c1
+      #image-search:
+      #  name: nginx64_packer_example_*
+
+transport:
+  username: ubuntu
+
+
+verifier:
+  name: inspec
+
+suites:
+  - name: default
